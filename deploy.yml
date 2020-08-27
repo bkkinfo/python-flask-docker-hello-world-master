@@ -1,0 +1,27 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: pythonpipeline 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pythonpipeline 
+    spec:
+      containers:
+        - name: pythonpipeline 
+          image: bishnukashyap/pythonpipeline
+          ports:
+          - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: pythonpipeline
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 5000 
+    selector:
+        app: pythonpipeline
